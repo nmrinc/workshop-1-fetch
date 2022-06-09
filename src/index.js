@@ -5,6 +5,12 @@ const { data } = await window
 
 const appNode = document.querySelector('#app');
 appNode.className = 'mt-10 grid grid-cols-2 gap-2';
+// @concept event delegation
+appNode.addEventListener('click', (e) => {
+	if (e.target.nodeName === 'H2') {
+		window.alert(e.target.innerHTML);
+	}
+});
 
 const formatPrice = (price) =>
 	new window.Intl.NumberFormat('en-En', {
@@ -19,10 +25,11 @@ const items = data.map(({ name: _name, price: _price, image: _image }) => {
 	image.src = `${baseUrl}${_image}`;
 	image.className =
 		'h-16 w-16 md:h-24 md:w-24 rounded-full mx-auto md:mx-0 md:mr-6';
+
 	const title = document.createElement('h2');
 	title.textContent = _name;
-	// title.style.fontSize = '3rem';
 	title.className = 'text-lg font-medium';
+
 	const price = document.createElement('div');
 	price.textContent = formatPrice(_price);
 	price.className = 'text-gray-600';
